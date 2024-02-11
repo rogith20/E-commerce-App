@@ -12,7 +12,6 @@ class CartPage extends StatelessWidget {
     double gst = 0.05; // 5% GST
 
     double extractDoubleFromPrice(String price) {
-      // Remove currency symbol and convert to double
       return double.parse(price.replaceAll('£', ''));
     }
 
@@ -27,13 +26,32 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: const Color(0xFF233A66),
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.arrow_back, color: Color(0xFFFED691)),
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(80.0),
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          child: AppBar(
+            leading: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: Icon(Icons.arrow_back, size: 25, color: Color(0xFFFED691)),
+            ),
+            title: const Text('YOUR CART',  style: TextStyle(
+                color:Color(0xFFFED691),
+                fontSize: 25,
+                fontWeight: FontWeight.w500,
+                letterSpacing: 2),),
+            backgroundColor: Colors.transparent,
+
+            actions: [
+              IconButton(
+                  onPressed: () {},
+                  icon:
+                  const Icon(Icons.add_shopping_cart, size: 30, color: Colors.white)),
+
+            ],),
         ),
-        title: const Text('Shopping Cart', style: TextStyle(color: Color(0xFFFED691))),
-        backgroundColor: Colors.transparent,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -83,14 +101,13 @@ class CartPage extends StatelessWidget {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  // Show payment confirmation dialog
                   showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: const Text('Payment Successful'),
                         content: Container(
-                          height: 120, // Set the height of the content
+                          height: 120,
                           child: const Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [

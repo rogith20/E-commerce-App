@@ -59,16 +59,26 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
             ),
             Positioned(
+              top: 100,
+              left: 150,
+              child: Image.asset(
+                currentItem['imagePath'],
+                width: 400,
+                height: 400,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Positioned(
               top: 20,
               left: 20,
               child: IconButton(
                 onPressed: () {
-                  // Navigate back when the back button is pressed
                   Navigator.pop(context);
                 },
                 icon: const Icon(Icons.arrow_back, size: 30, color: Color(0xFFFED691)),
               ),
             ),
+
             Positioned(
               top: 20,
               left: 400,
@@ -211,6 +221,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                 ),
               ),
             ),
+
             Positioned(
               top: MediaQuery.of(context).size.height / 1.7,
               left: 40,

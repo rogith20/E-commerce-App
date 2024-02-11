@@ -1,8 +1,9 @@
 import 'package:ecommerce/custom_card.dart';
+import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/screens/cart.dart';
 import 'package:ecommerce/screens/favourites.dart';
 import 'package:ecommerce/screens/product_details.dart';
-import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,8 +17,10 @@ class _HomePageState extends State<HomePage> {
   bool isFavourite = false;
   List<Map<String, dynamic>> items = generateCustomNames();
   int currentIndex = 0;
-  final PageController _pageController =
-  PageController(viewportFraction: 0.5);
+  int currentPage = 0;
+  final CarouselController _carouselController = CarouselController();
+  final PageController _pageController = PageController(viewportFraction: 0.5);
+  final PageController _carouselPageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,18 +34,19 @@ class _HomePageState extends State<HomePage> {
             elevation: 0,
             backgroundColor: Colors.transparent,
             iconTheme:
-            const IconThemeData(color: Color(0xFFFED691), size: 38.0),
+                const IconThemeData(color: Color(0xFFFED691), size: 38.0),
             actions: [
               IconButton(
                   onPressed: () {},
                   icon:
-                  const Icon(Icons.search, size: 38, color: Colors.white)),
+                      const Icon(Icons.search, size: 38, color: Colors.white)),
               IconButton(
                   onPressed: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => CartPage(cartItems: favoriteItems),
+                        builder: (context) =>
+                            CartPage(cartItems: favoriteItems),
                       ),
                     );
                   },
@@ -61,6 +65,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(height: 20),
                   Text(
                     'YOUR ACCOUNT',
                     style: TextStyle(
@@ -78,7 +83,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             ListTile(
-              leading: const Icon(Icons.favorite_border),
+              leading:
+                  const Icon(Icons.favorite_border, color: Color(0xFFFED691)),
               title: const Text(
                 'Your favourites',
                 style: TextStyle(color: Colors.white),
@@ -87,13 +93,14 @@ class _HomePageState extends State<HomePage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => FavoritesPage(favoriteItems: favoriteItems),
+                    builder: (context) =>
+                        FavoritesPage(favoriteItems: favoriteItems),
                   ),
                 );
               },
             ),
             ListTile(
-              leading: const Icon(Icons.history),
+              leading: const Icon(Icons.history, color: Color(0xFFFED691)),
               title: const Text(
                 'Recent Items',
                 style: TextStyle(color: Colors.white),
@@ -104,7 +111,8 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.card_giftcard),
+              leading:
+                  const Icon(Icons.card_giftcard, color: Color(0xFFFED691)),
               title: const Text(
                 'Your coupons',
                 style: TextStyle(color: Colors.white),
@@ -115,7 +123,7 @@ class _HomePageState extends State<HomePage> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.settings),
+              leading: const Icon(Icons.settings, color: Color(0xFFFED691)),
               title: const Text(
                 'Settings',
                 style: TextStyle(color: Colors.white),
@@ -158,14 +166,14 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const Padding(padding: EdgeInsets.only(left: 159)),
                   IconButton(
-                      onPressed: () => _scroll(-1),
+                      onPressed: () => _scrollFeatured(-1),
                       icon: const Icon(
                         Icons.arrow_back_ios,
                         size: 38,
                         color: Color(0xFFFED691),
                       )),
                   IconButton(
-                      onPressed: () => _scroll(1),
+                      onPressed: () => _scrollFeatured(1),
                       icon: const Icon(
                         Icons.arrow_forward_ios,
                         size: 38,
@@ -174,80 +182,357 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 25),
-              Container(
-                height: 270,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: const Color(0xFFFED691),
-                    borderRadius: BorderRadius.circular(20)),
-                child: Padding(
-                  padding: const EdgeInsets.all(50.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "ABC-123",
-                        style: TextStyle(
-                            color: Colors.brown,
-                            fontSize: 12,
-                            letterSpacing: 2,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const Text("WISHDOIT",
-                          style: TextStyle(
-                              color: Color(0xFF233A66),
-                              fontSize: 23,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 10),
-                      const Text("Fashion Men Quartz",
-                          style: TextStyle(
-                              color: Color(0xFF233A66),
-                              fontSize: 12,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.w400)),
-                      const Text("Watch Luxury Leather",
-                          style: TextStyle(
-                              color: Color(0xFF233A66),
-                              fontSize: 12,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.w400)),
-                      const Text("Strap Waterproof",
-                          style: TextStyle(
-                              color: Color(0xFF233A66),
-                              fontSize: 12,
-                              letterSpacing: 2,
-                              fontWeight: FontWeight.w400)),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                          onPressed: ArgumentError.notNull,
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            shadowColor: Colors.black.withOpacity(0.5),
-                            elevation: 10,
-                            fixedSize: const Size(150, 5),
-                          ),
-                          child: const Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'BUY NOW',
-                                style: TextStyle(
-                                    color: Colors.brown,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              SizedBox(width: 10),
-                              Icon(
-                                Icons.arrow_forward,
-                                size: 20,
-                              ),
-                            ],
-                          ))
-                    ],
-                  ),
+              CarouselSlider(
+                carouselController: _carouselController,
+                options: CarouselOptions(
+                  height: 270,
+                  viewportFraction: 1.0,
+                  enableInfiniteScroll: false,
                 ),
+                items: [
+                  Container(
+                    width: MediaQuery.of(context).size.width - 60,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFED691),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "ABC-123",
+                                    style: TextStyle(
+                                      color: Colors.brown,
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "WISHDOIT",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 23,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    "Fashion Men Quartz",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Watch Luxury Leather",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Strap Waterproof",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                    onPressed: ArgumentError.notNull,
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      shadowColor:
+                                          Colors.black.withOpacity(0.5),
+                                      elevation: 10,
+                                      fixedSize: const Size(150, 5),
+                                    ),
+                                    child: const Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'BUY NOW',
+                                          style: TextStyle(
+                                            color: Colors.brown,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Icon(
+                                          Icons.arrow_forward,
+                                          size: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 130, // Adjust width as needed
+                            height: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                'assets/1.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 60,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFED691),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "ABC-123",
+                                    style: TextStyle(
+                                      color: Colors.brown,
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "WISHDOIT",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 23,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    "Fashion Men Quartz",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Watch Luxury Leather",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Strap Waterproof",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                    onPressed: ArgumentError.notNull,
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      shadowColor:
+                                          Colors.black.withOpacity(0.5),
+                                      elevation: 10,
+                                      fixedSize: const Size(150, 5),
+                                    ),
+                                    child: const Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'BUY NOW',
+                                          style: TextStyle(
+                                            color: Colors.brown,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Icon(
+                                          Icons.arrow_forward,
+                                          size: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 130, // Adjust width as needed
+                            height: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                'assets/2.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    width: MediaQuery.of(context).size.width - 60,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFED691),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(30.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    "ABC-123",
+                                    style: TextStyle(
+                                      color: Colors.brown,
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "WISHDOIT",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 23,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  const Text(
+                                    "Fashion Men Quartz",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Watch Luxury Leather",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const Text(
+                                    "Strap Waterproof",
+                                    style: TextStyle(
+                                      color: Color(0xFF233A66),
+                                      fontSize: 12,
+                                      letterSpacing: 2,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 10),
+                                  ElevatedButton(
+                                    onPressed: ArgumentError.notNull,
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10.0),
+                                      ),
+                                      shadowColor:
+                                          Colors.black.withOpacity(0.5),
+                                      elevation: 10,
+                                      fixedSize: const Size(150, 5),
+                                    ),
+                                    child: const Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          'BUY NOW',
+                                          style: TextStyle(
+                                            color: Colors.brown,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(width: 10),
+                                        Icon(
+                                          Icons.arrow_forward,
+                                          size: 20,
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 130, // Adjust width as needed
+                            height: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: Image.asset(
+                                'assets/8.png',
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 50),
               const Text(
@@ -322,6 +607,7 @@ class _HomePageState extends State<HomePage> {
                                       color: const Color(0xFFFED691),
                                       borderRadius: BorderRadius.circular(20),
                                     ),
+                                    child: Image.asset(item['imagePath']),
                                   ),
                                   Positioned(
                                     top: 10,
@@ -338,7 +624,7 @@ class _HomePageState extends State<HomePage> {
                                           onPressed: () {
                                             setState(() {
                                               item['isFavourite'] =
-                                              !item['isFavourite'];
+                                                  !item['isFavourite'];
                                               if (item['isFavourite']) {
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(SnackBar(
@@ -347,24 +633,27 @@ class _HomePageState extends State<HomePage> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   behavior:
-                                                  SnackBarBehavior.floating,
+                                                      SnackBarBehavior.floating,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0),
+                                                        BorderRadius.circular(
+                                                            10.0),
                                                   ),
                                                   action: SnackBarAction(
                                                     label: 'Undo',
                                                     onPressed: () {
                                                       setState(() {
                                                         item['isFavourite'] =
-                                                        !item[
-                                                        'isFavourite'];
+                                                            !item[
+                                                                'isFavourite'];
                                                       });
                                                     },
                                                   ),
                                                 ));
-                                                favoriteItems.add({'title': item['title'], 'subtitle': item['subtitle']});
+                                                favoriteItems.add({
+                                                  'title': item['title'],
+                                                  'subtitle': item['subtitle']
+                                                });
                                               } else {
                                                 ScaffoldMessenger.of(context)
                                                     .showSnackBar(SnackBar(
@@ -373,22 +662,30 @@ class _HomePageState extends State<HomePage> {
                                                   duration: const Duration(
                                                       seconds: 1),
                                                   behavior:
-                                                  SnackBarBehavior.floating,
+                                                      SnackBarBehavior.floating,
                                                   shape: RoundedRectangleBorder(
                                                     borderRadius:
-                                                    BorderRadius.circular(
-                                                        10.0),
+                                                        BorderRadius.circular(
+                                                            10.0),
                                                   ),
                                                   action: SnackBarAction(
                                                     label: 'Undo',
                                                     onPressed: () {
                                                       setState(() {
                                                         item['isFavourite'] =
-                                                        !item[
-                                                        'isFavourite'];
+                                                            !item[
+                                                                'isFavourite'];
                                                       });
                                                       favoriteItems.removeWhere(
-                                                              (favorite) => favorite['title'] == item['title'] && favorite['subtitle'] == item['subtitle']);
+                                                          (favorite) =>
+                                                              favorite[
+                                                                      'title'] ==
+                                                                  item[
+                                                                      'title'] &&
+                                                              favorite[
+                                                                      'subtitle'] ==
+                                                                  item[
+                                                                      'subtitle']);
                                                     },
                                                   ),
                                                 ));
@@ -437,6 +734,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
   void _scroll(int offset) {
     currentIndex += offset;
 
@@ -449,6 +747,23 @@ class _HomePageState extends State<HomePage> {
     _pageController.animateToPage(
       currentIndex,
       duration: const Duration(milliseconds: 500), // Increase the duration
+      curve: Curves.easeInOut,
+    );
+  }
+
+  void _scrollFeatured(int offset) {
+    int newPage = currentPage + offset;
+    if (newPage < 0) {
+      newPage = 0;
+    } else if (newPage >= items.length) {
+      newPage = items.length - 1;
+    }
+    setState(() {
+      currentPage = newPage;
+    });
+    _carouselController.animateToPage(
+      newPage,
+      duration: Duration(milliseconds: 500),
       curve: Curves.easeInOut,
     );
   }

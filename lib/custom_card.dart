@@ -8,6 +8,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '1 Year',
       'price': '£299',
       'isFavourite': false,
+      'imagePath': 'assets/1.png',
     },
     {
       'title': 'TOMMY HILFIGER',
@@ -17,6 +18,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '2 YEARS',
       'price': '£499',
       'isFavourite': false,
+      'imagePath': 'assets/2.png'
     },
     {
       'title': 'ROLEX',
@@ -26,6 +28,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '5 YEARS',
       'price': '£999',
       'isFavourite': false,
+      'imagePath': 'assets/3.png'
     },
     {
       'title': 'TAG HEUER',
@@ -35,6 +38,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '3 YEARS',
       'price': '£1499',
       'isFavourite': false,
+      'imagePath': 'assets/4.png'
     },
     {
       'title': 'OMEGA',
@@ -44,6 +48,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '4 YEARS',
       'price': '£2999',
       'isFavourite': false,
+      'imagePath': 'assets/5.png'
     },
     {
       'title': 'CITIZEN',
@@ -53,6 +58,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '2 YEARS',
       'price': '£199',
       'isFavourite': false,
+      'imagePath': 'assets/6.png'
     },
     {
       'title': 'SWATCH',
@@ -62,6 +68,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '1 YEAR',
       'price': '£79',
       'isFavourite': false,
+      'imagePath': 'assets/7.png'
     },
     {
       'title': 'HAMILTON',
@@ -71,6 +78,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'warranty': '3 YEARS',
       'price': '£599',
       'isFavourite': false,
+      'imagePath': 'assets/8.png'
     },
   ];
 }

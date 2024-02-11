@@ -17,7 +17,9 @@ class _FavoritesPageState extends State<FavoritesPage> {
       backgroundColor: const Color(0xFF233A66),
       appBar: AppBar(
         leading: IconButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
           icon: const Icon(Icons.arrow_back, color: Color(0xFFFED691)),
         ),
         title: const Text('Favorites',style: TextStyle( color: Color(0xFFFED691),),),
