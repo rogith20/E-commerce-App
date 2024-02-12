@@ -1,4 +1,5 @@
 import 'package:ecommerce/custom_card.dart';
+import 'package:ecommerce/screens/search.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:ecommerce/screens/cart.dart';
@@ -37,7 +38,9 @@ class _HomePageState extends State<HomePage> {
                 const IconThemeData(color: Color(0xFFFED691), size: 38.0),
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
+                  },
                   icon:
                       const Icon(Icons.search, size: 38, color: Colors.white)),
               IconButton(
@@ -588,7 +591,7 @@ class _HomePageState extends State<HomePage> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
-                                    ProductDetails(product: items[index])),
+                                    ProductDetails(product: items[index], itemName: '',)),
                           );
                         },
                         child: Column(

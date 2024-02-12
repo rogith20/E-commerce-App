@@ -3,8 +3,8 @@ import 'package:ecommerce/screens/cart.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetails extends StatefulWidget {
-  const ProductDetails({Key? key,required this.product}) : super(key: key);
-
+  const ProductDetails({Key? key, required this.product, required this.itemName}) : super(key: key);
+  final String itemName;
   final Map<String, dynamic> product;
 
   @override

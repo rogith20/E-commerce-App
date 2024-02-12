@@ -5,7 +5,7 @@ List<Map<String, dynamic>> generateCustomNames() {
       'subtitle': 'GRANT WATCH',
       'strap': 'LEATHER',
       'color': 'BROWN',
-      'warranty': '1 Year',
+      'warranty': '1 YEAR',
       'price': '£299',
       'isFavourite': false,
       'imagePath': 'assets/1.png',
